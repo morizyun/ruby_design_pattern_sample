@@ -2,6 +2,7 @@
 require 'find'
 
 # 命令・抽象的な表現(AbstractExpression)
+# Expression　共通するコードを持つ
 class Expression
   def |(other)
     Or.new(self, other)
@@ -13,23 +14,7 @@ class Expression
 end
 
 # 終端となる表現(構造木の葉) (TerminalExpression)
-class FileName < Expression
-  def initialize(pattern)
-    @pattern = pattern
-  end
-
-  def evaluate(dir)
-    results= []
-    Find.find(dir) do |p|
-      next unless File.file?(p)
-      name = File.basename(p)
-      results << p if File.fnmatch(@pattern, name)
-    end
-    results
-  end
-end
-
-# 終端となる表現(構造木の葉) (TerminalExpression)
+# All: すべてのファイルを返す
 class All < Expression
   def evaluate(dir)
     results= []
@@ -42,17 +27,27 @@ class All < Expression
 end
 
 # 終端となる表現(構造木の葉) (TerminalExpression)
-class Not < Expression
-  def initialize(expression)
-    @expression = expression
+# FileName: 与えられたパターンとマッチするすべてのファイル名を返す
+class FileName < Expression
+  def initialize(pattern)
+    @pattern = pattern
   end
 
   def evaluate(dir)
-    All.new.evaluate(dir) - @expression.evaluate(dir)
+    results= []
+    Find.find(dir) do |p|
+      next unless File.file?(p)
+      # File.basename => ファイルパスからファイル名だけを抽出
+      name = File.basename(p)
+      # File.fnmatch => ファイル名がパターンにマッチした場合のみtrueを返す
+      results << p if File.fnmatch(@pattern, name)
+    end
+    results
   end
 end
 
 # 終端となる表現(構造木の葉) (TerminalExpression)
+# Bigger: 指定したファイルサイズより大きいファイルを返す
 class Bigger < Expression
   def initialize(size)
     @size = size
@@ -69,6 +64,7 @@ class Bigger < Expression
 end
 
 # 終端となる表現(構造木の葉) (TerminalExpression)
+# Writable: 書込可能なファイルを返す
 class Writable < Expression
   def evaluate(dir)
     results = []
@@ -81,6 +77,19 @@ class Writable < Expression
 end
 
 # 終端以外の表現(構造木の節) NonterminalExpression
+# Not: ファイル検索式の否定を表すクラス
+class Not < Expression
+  def initialize(expression)
+    @expression = expression
+  end
+
+  def evaluate(dir)
+    All.new.evaluate(dir) - @expression.evaluate(dir)
+  end
+end
+
+# 終端以外の表現(構造木の節) NonterminalExpression
+# Or: 2ファイル検索式をORで結合する
 class Or < Expression
   def initialize(expression1, expression2)
     @expression1 = expression1
@@ -95,6 +104,7 @@ class Or < Expression
 end
 
 # 終端以外の表現(構造木の節) NonterminalExpression
+# And: 2ファイル検索式をANDで結合する
 class And < Expression
   def initialize(expression1, expression2)
     @expression1 = expression1
