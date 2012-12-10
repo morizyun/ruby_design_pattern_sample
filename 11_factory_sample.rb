@@ -37,7 +37,8 @@ class Pond
   end
 end
 
-  # Factory 動物を生成する
+# 抽象ファクトリ(AbstractFactory)
+# Factory 動物を生成する
 class AnimalFactory
   def initialize(animal_class)
     @animal_class = animal_class

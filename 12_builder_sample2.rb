@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # ConcreteBuilder：ビルダーの実装部分
-# SugarWater： 砂糖水クラス
+# SaltWater： 塩水クラス
 class SaltWater
   attr_accessor :water, :salt
   def initialize(water, salt)
