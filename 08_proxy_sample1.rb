@@ -3,6 +3,7 @@
 require "etc"
 
 # 対象オブジェクト(subject)：本物のオブジェクト
+# 銀行の入出金業務を行う
 class BankAccount
   attr_reader :balance
 
@@ -10,10 +11,12 @@ class BankAccount
     @balance = balance
   end
 
+  # 入金
   def deposit(amount)
     @balance += amount
   end
 
+  # 出金
   def withdraw(amount)
     @balance -= amount
   end

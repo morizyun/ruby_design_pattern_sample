@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+require "forwardable"
 
 # ConcreteComponent: ベースとなる処理をもつ
 # SimpleWrite: ファイルへの単純な出力を行うクラス
@@ -31,64 +32,41 @@ end
 # Decorator: ベースとなるオブジェクトに機能を追加する
 # WriterDecorator: タイムスタンプを追加する機能を持つ
 class WriterDecorator
+  extend Forwardable
+
+  # forwardableで以下のメソッドの処理を委譲している
+  def_delegators :@real_writer, :write_line, :pos, :rewind, :close
+
   def initialize(real_writer)
     @real_writer = real_writer
-  end
-
-  def write_line(line)
-    @real_writer.write_line(line)
-  end
-
-  def pos
-    @real_writer.pos
-  end
-
-  def rewind
-    @real_writer.rewind
-  end
-
-  def close
-    @real_writer.close
   end
 end
 
 # Decorator: ベースとなるオブジェクトに機能を追加する
 # NumberingWriter: 行番号出力機能を装飾する
-class NumberingWriter < WriterDecorator
-
-  def initialize(real_writer)
-    super(real_writer)
-    @line_number = 1
-  end
+module NumberingWriter
+  attr_reader :line_number
 
   def write_line(line)
-    @real_writer.write_line("#{@line_number} : #{line}")
+    @line_number = 1 unless @line_number
+    super("#{@line_number} : #{line}")
+    @line_number += 1
   end
 end
 
 # Decorator: ベースとなるオブジェクトに機能を追加する
 # TimeStampingWriter: タイムスタンプ出力機能を装飾する
-class TimeStampingWriter < WriterDecorator
+module TimeStampingWriter
   def write_line(line)
-    @real_writer.write_line("#{Time.new} : #{line}")
+    super("#{Time.new} : #{line}")
   end
 end
 
 # ===========================================
-f = NumberingWriter.new(SimpleWriter.new("file1.txt"))
-f.write_line("Hello out there")
-f.close
-# file1.txtに以下の内容が出力される
-#1 : Hello world
-
-f = TimeStampingWriter.new(SimpleWriter.new("file2.txt"))
-f.write_line("Hello out there")
-f.close
-# file2.txtに以下の内容が出力される
-#2012-12-09 12:55:38 +0900 : Hello out there
-
-f = TimeStampingWriter.new(NumberingWriter.new(SimpleWriter.new("file3.txt")))
+f = SimpleWriter.new("file3.txt")
+f.extend TimeStampingWriter
+f.extend NumberingWriter
 f.write_line("Hello out there")
 f.close
 # file3.txtに以下の内容が出力される
-#1 : 2012-12-09 12:55:38 +0900 : Hello out there
+#2012-12-09 13:26:27 +0900 : 1 : Hello out there

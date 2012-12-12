@@ -26,3 +26,7 @@ obj2.counter += 1
 puts(obj2.counter)
 # 2
 # ↑ 前回の+1が引き継がれている
+
+obj3 = SingletonObject.new
+# private method `new' called for SingletonObject:Class (NoMethodError)
+# ↑ newでのインスタンスの作成に失敗
