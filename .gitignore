@@ -4,3 +4,6 @@ file*
 ./chap15/*
 chap15/*
 sample*
+./idea/*
+.DS_Store
+.idea
