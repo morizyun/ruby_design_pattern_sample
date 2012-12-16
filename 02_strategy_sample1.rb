@@ -1,3 +1,28 @@
+# レポートの出力を抽象化したクラス(抽象戦略)
+class Formatter
+  def output_report(title, text)
+    raise 'Called abstract method !!'
+  end
+end
+
+# HTML形式に整形して出力(具体戦略)
+class HTMLFormatter < Formatter
+  def output_report(report)
+    puts "<html><head><title>#{report.title}</title></head><body>"
+    report.text.each { |line| puts "<p>#{line}</p>" }
+    puts '</body></html>'
+  end
+end
+
+# PlaneText形式(*****で囲う)に整形して出力(具体戦略)
+class PlaneTextFormatter < Formatter
+  def output_report(report)
+    puts "***** #{report.title} *****"
+    report.text.each { |line| puts(line) }
+  end
+end
+
+# レポートを表す(コンテキスト)
 class Report
   attr_reader :title, :text
   attr_accessor :formatter
@@ -10,27 +35,6 @@ class Report
 
   def output_report
     @formatter.output_report(self)
-  end
-end
-
-class Formatter
-  def output_report(title, text)
-    raise 'Called abstract method !!'
-  end
-end
-
-class HTMLFormatter < Formatter
-  def output_report(report)
-    puts "<html><head><title>#{report.title}</title></head><body>"
-    report.text.each { |line| puts "<p>#{line}</p>" }
-    puts '</body></html>'
-  end
-end
-
-class PlaneTextFormatter < Formatter
-  def output_report(report)
-    puts "***** #{report.title} *****"
-    report.text.each { |line| puts(line) }
   end
 end
 
