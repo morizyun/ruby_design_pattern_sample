@@ -9,7 +9,7 @@ class SaltWater
     @salt = salt
   end
 
-  # 塩を加える
+  # 素材(ここでは塩)を加える
   def add_material(salt_amount)
     @salt += salt_amount
   end
@@ -24,7 +24,7 @@ class SugarWater
     @sugar = sugar
   end
 
-  # 砂糖を加える
+  # 素材(ここでは砂糖)を加える
   def add_material(sugar_amount)
     @sugar += sugar_amount
   end

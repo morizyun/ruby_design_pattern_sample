@@ -1,6 +1,6 @@
 ## Overview
 
-Ruby Design Pattern learning sample
+Sample Ruby code for GoF design pattern
 
 ## Blog article about this source
 

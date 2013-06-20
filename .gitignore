@@ -7,3 +7,4 @@ sample*
 ./idea/*
 .DS_Store
 .idea
+.ruby-version

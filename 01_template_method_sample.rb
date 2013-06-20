@@ -1,6 +1,6 @@
 class Report
   def initialize
-    @title = "html report title"
+    @title = "report title"
     @text = ["report line 1", "report line 2", "report line 3"]
   end
 
@@ -67,7 +67,7 @@ end
 # ===========================================
 html_report = HTMLReport.new
 html_report.output_report
-#<html><head><title>html report title</title></head><body>
+#<html><head><title>report title</title></head><body>
 #<p>report line 1</p>
 #<p>report line 2</p>
 #<p>report line 3</p>
@@ -75,7 +75,7 @@ html_report.output_report
 
 plane_text_report = PlaneTextReport.new
 plane_text_report.output_report
-#**** html report title ****
+#**** report title ****
 #report line 1
 #report line 2
 #report line 3
