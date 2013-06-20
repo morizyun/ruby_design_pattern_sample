@@ -14,7 +14,7 @@ class HTMLFormatter < Formatter
   end
 end
 
-# PlaneText形式(*****で囲う)に整形して出力(具体戦略)
+# PlaneText形式に整形して出力(具体戦略)
 class PlaneTextFormatter < Formatter
   def output_report(report)
     puts "***** #{report.title} *****"
