@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# 対象オブジェクト(subject)：本物のオブジェクト
-# 銀行の入出金業務を行う
+# 銀行の入出金業務を行う(対象オブジェクト/subject)
 class BankAccount
   attr_reader :balance
 
@@ -21,7 +20,7 @@ class BankAccount
   end
 end
 
-# 代理サブジェクト(proxy)、BankAccountの生成を遅らせる仮想Proxy
+# BankAccountの生成を遅らせる仮想Proxy
 class VirtualAccountProxy
   def initialize(starting_balance)
     puts "VirtualAccountPoxyを生成しました。BankAccountはまだ生成していません。"
@@ -51,11 +50,14 @@ end
 
 # ===========================================
 proxy = VirtualAccountProxy.new(100)
+#=> VirtualAccountPoxyを生成しました。BankAccountはまだ生成していません。
+
 puts proxy.announce
+#=> Virtual Account Proxyが担当するアナウンスです
+
 puts proxy.deposit(50)
+#=> BankAccountを生成しました
+#=> 150
+
 puts proxy.withdraw(10)
-#VirtualAccountPoxyを生成しました。BankAccountはまだ生成していません。
-#Virtual Account Proxyが担当するアナウンスです
-#BankAccountを生成しました
-#150
-#140
+#=> 140
