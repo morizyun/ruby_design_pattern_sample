@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# ConcreteComponent: ベースとなる処理をもつ
-# SimpleWrite: ファイルへの単純な出力を行うクラス
+# ファイルへの単純な出力を行う (ConcreteComponent)
 class SimpleWriter
   def initialize(path)
     @file = File.open(path, "w")
@@ -30,6 +29,6 @@ end
 
 # ===========================================
 
-writer = SimpleWriter.new('sample1.txt')
+writer = SimpleWriter.new('09_test_data_dir/sample1.txt')
 writer.write_line('飾り気のない一行')
 writer.close

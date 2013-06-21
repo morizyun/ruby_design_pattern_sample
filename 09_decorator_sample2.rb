@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# ConcreteComponent: ベースとなる処理をもつ
-# SimpleWrite: ファイルへの単純な出力を行うクラス
+# ファイルへの単純な出力を行う (ConcreteComponent)
 class SimpleWriter
   def initialize(path)
     @file = File.open(path, "w")
@@ -28,8 +27,7 @@ class SimpleWriter
   end
 end
 
-# Decorator: ベースとなるオブジェクトに機能を追加する
-# WriterDecorator: タイムスタンプを追加する機能を持つ
+# 複数のデコレータの共通部分(Decorator)
 class WriterDecorator
   def initialize(real_writer)
     @real_writer = real_writer
@@ -52,10 +50,8 @@ class WriterDecorator
   end
 end
 
-# Decorator: ベースとなるオブジェクトに機能を追加する
-# NumberingWriter: 行番号出力機能を装飾する
+# 行番号出力機能を装飾する(Decorator)
 class NumberingWriter < WriterDecorator
-
   def initialize(real_writer)
     super(real_writer)
     @line_number = 1
@@ -66,8 +62,7 @@ class NumberingWriter < WriterDecorator
   end
 end
 
-# Decorator: ベースとなるオブジェクトに機能を追加する
-# TimeStampingWriter: タイムスタンプ出力機能を装飾する
+# タイムスタンプ出力機能を装飾する(Decorator)
 class TimeStampingWriter < WriterDecorator
   def write_line(line)
     @real_writer.write_line("#{Time.new} : #{line}")
@@ -75,19 +70,20 @@ class TimeStampingWriter < WriterDecorator
 end
 
 # ===========================================
-f = NumberingWriter.new(SimpleWriter.new("file1.txt"))
+
+f = NumberingWriter.new(SimpleWriter.new("09_test_data_dir/file1.txt"))
 f.write_line("Hello out there")
 f.close
 # file1.txtに以下の内容が出力される
 #1 : Hello world
 
-f = TimeStampingWriter.new(SimpleWriter.new("file2.txt"))
+f = TimeStampingWriter.new(SimpleWriter.new("09_test_data_dir/file2.txt"))
 f.write_line("Hello out there")
 f.close
 # file2.txtに以下の内容が出力される
 #2012-12-09 12:55:38 +0900 : Hello out there
 
-f = TimeStampingWriter.new(NumberingWriter.new(SimpleWriter.new("file3.txt")))
+f = TimeStampingWriter.new(NumberingWriter.new(SimpleWriter.new("09_test_data_dir/file3.txt")))
 f.write_line("Hello out there")
 f.close
 # file3.txtに以下の内容が出力される

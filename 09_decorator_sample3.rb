@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 require "forwardable"
 
-# ConcreteComponent: ベースとなる処理をもつ
-# SimpleWrite: ファイルへの単純な出力を行うクラス
+# ファイルへの単純な出力を行う (ConcreteComponent)
 class SimpleWriter
   def initialize(path)
     @file = File.open(path, "w")
@@ -29,8 +28,7 @@ class SimpleWriter
   end
 end
 
-# Decorator: ベースとなるオブジェクトに機能を追加する
-# WriterDecorator: タイムスタンプを追加する機能を持つ
+# 複数のデコレータの共通部分(Decorator)
 class WriterDecorator
   extend Forwardable
 
@@ -42,8 +40,7 @@ class WriterDecorator
   end
 end
 
-# Decorator: ベースとなるオブジェクトに機能を追加する
-# NumberingWriter: 行番号出力機能を装飾する
+# 行番号出力機能を装飾する(Decorator)
 module NumberingWriter
   attr_reader :line_number
 
@@ -54,8 +51,7 @@ module NumberingWriter
   end
 end
 
-# Decorator: ベースとなるオブジェクトに機能を追加する
-# TimeStampingWriter: タイムスタンプ出力機能を装飾する
+# タイムスタンプ出力機能を装飾する(Decorator)
 module TimeStampingWriter
   def write_line(line)
     super("#{Time.new} : #{line}")
@@ -63,7 +59,7 @@ module TimeStampingWriter
 end
 
 # ===========================================
-f = SimpleWriter.new("file3.txt")
+f = SimpleWriter.new("09_test_data_dir/file3.txt")
 f.extend TimeStampingWriter
 f.extend NumberingWriter
 f.write_line("Hello out there")
