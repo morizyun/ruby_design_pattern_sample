@@ -29,6 +29,6 @@ end
 
 # ===========================================
 
-writer = SimpleWriter.new('09_test_data_dir/sample1.txt')
+writer = SimpleWriter.new('09_test_data/sample1.txt')
 writer.write_line('飾り気のない一行')
 writer.close

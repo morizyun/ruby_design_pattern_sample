@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
-require "forwardable"
+require 'forwardable'
 
 # ファイルへの単純な出力を行う (ConcreteComponent)
 class SimpleWriter
   def initialize(path)
-    @file = File.open(path, "w")
+    @file = File.open(path, 'w')
   end
 
   # データを出力する
   def write_line(line)
     @file.print(line)
-    @file.print("\n")
+    @file.print('\n')
   end
 
   # ファイル出力位置
@@ -59,10 +59,10 @@ module TimeStampingWriter
 end
 
 # ===========================================
-f = SimpleWriter.new("09_test_data_dir/file3.txt")
+f = SimpleWriter.new('09_test_data/file3.txt')
 f.extend TimeStampingWriter
 f.extend NumberingWriter
-f.write_line("Hello out there")
+f.write_line('Hello out there')
 f.close
 # file3.txtに以下の内容が出力される
 #2012-12-09 13:26:27 +0900 : 1 : Hello out there
