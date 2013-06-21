@@ -1,6 +1,5 @@
-# アダプティ(Adaptee)
-# Targetにはないインターフェイスを持つ
-class OldTextObject
+# Targetにはないインターフェイスを持つ (Adaptee)
+class OldPrinter
   def initialize(string)
     @string = string.dup
   end
@@ -14,9 +13,8 @@ class OldTextObject
   end
 end
 
-# ターゲット(Target)
-# 実行対象
-class TextObject
+# 利用者(Client)へのインターフェイス (Target)
+class Printer
   def initialize(obj)
     @obj = obj
   end
@@ -30,8 +28,8 @@ class TextObject
   end
 end
 
-# 利用者(Client)
-text = OldTextObject.new("Hello")
+# textオブジェクト(OldPrinter)にAdapterの役割を持つ得意メソッドを追加
+text = OldPrinter.new("Hello")
 def text.print_weak
   show_with_bracket
 end
@@ -40,8 +38,11 @@ def text.print_strong
 end
 
 # ===========================================
-p = TextObject.new(text)
+# 利用者(Client)
+p = Printer.new(text)
+
 p.print_weak
+#=> [Hello]
+
 p.print_strong
-#[Hello]
-#**Hello**
+#=> **Hello**

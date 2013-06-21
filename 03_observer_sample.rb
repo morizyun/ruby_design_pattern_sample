@@ -33,15 +33,15 @@ end
 # 税金の請求書の発行を行う(ConcreteObserver)
 class TaxMan
   def update(changed_employee)
-    puts "#{changed_employee.name}に新しい税金の請求書を送ります"
+    puts "#{changed_employee.name}に新しい税金の請求書を送ります。"
   end
 end
 
 # ===========================================
 john = Employee.new('John', 'Senior Vice President', 5000)
 john.salary = 6000
+#=> 彼の給料は6000になりました！Senior Vice Presidentのために新しい小切手を切ります。
+#=> Johnに新しい税金の請求書を送ります。
 john.salary = 7000
-#彼の給料は6000になりました！Senior Vice Presidentのために新しい小切手を切ります。
-#Johnに新しい税金の請求書を送ります
-#彼の給料は7000になりました！Senior Vice Presidentのために新しい小切手を切ります。
-#Johnに新しい税金の請求書を送ります
+#=> 彼の給料は7000になりました！Senior Vice Presidentのために新しい小切手を切ります。
+#=> Johnに新しい税金の請求書を送ります。

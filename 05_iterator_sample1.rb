@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# 集約オブジェクト中の要素
+# 記事を表す(集約オブジェクト中の要素)
 class Article
   def initialize(title)
     @title = title
@@ -10,7 +10,7 @@ class Article
   attr_reader :title
 end
 
-# 集約オブジェクト(ブログ/blog)
+# ブログを表す(集約オブジェクト)
 class Blog
   def initialize
     @articles = []
@@ -49,7 +49,7 @@ class BlogIterator
     @index < @blog.length
   end
 
-  # indexを1つ進めて、次のArticleクラスを返す
+  # indexを1つ進めて、次の記事(Article)を返す
   def next_article
     article = self.has_next? ? @blog.get_article_at(@index) : nil
     @index = @index + 1
@@ -69,7 +69,7 @@ while iterator.has_next?
   article = iterator.next_article
   puts article.title
 end
-#デザインパターン1
-#デザインパターン2
-#デザインパターン3
-#デザインパターン4
+#=> デザインパターン1
+#=> デザインパターン2
+#=> デザインパターン3
+#=> デザインパターン4

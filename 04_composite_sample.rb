@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# FileEntry, DirEntryクラスの共通メソッドを規定
-# Component
+# FileEntry, DirEntryクラスの共通メソッドを規定(Component)
 class Entry
   # ファイル/ディレクトリの名称を返す
   def get_name; end
@@ -13,8 +12,7 @@ class Entry
   def remove; end
 end
 
-# ファイルを表す
-# Leaf (中身)
+# ファイルを表す(Leaf)
 class FileEntry < Entry
   def initialize(name)
     @name = name
@@ -36,7 +34,7 @@ class FileEntry < Entry
   end
 end
 
-# Composite
+# ディレクトリを表す(Composite)
 class DirEntry < Entry
   def initialize(name)
     @title = name
@@ -78,13 +76,13 @@ tmp.add(FileEntry.new("data"))
 root.add(tmp)
 
 root.ls_entry("")
-#/root
-#/root/tmp
-#/root/tmp/conf
-#/root/tmp/data
+#=> /root
+#=> /root/tmp
+#=> /root/tmp/conf
+#=> /root/tmp/data
 
 root.remove
-#confを削除しました
-#dataを削除しました
-#tmpを削除しました
-#rootを削除しました
+#=> confを削除しました
+#=> dataを削除しました
+#=> tmpを削除しました
+#=> rootを削除しました

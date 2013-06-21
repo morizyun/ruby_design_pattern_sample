@@ -106,9 +106,9 @@ command_list.add_command(DeleteFile.new("file1.txt"))
 
 command_list.execute
 puts(command_list.description)
-#Create file : file1.txt
-#Copy file : file1.txt to file2.txt
-#Delete file : file1.txt
+#=> Create file : file1.txt
+#=> Copy file : file1.txt to file2.txt
+#=> Delete file : file1.txt
 
 # 処理を取り消すコマンド
 command_list.undo_execute

@@ -1,6 +1,5 @@
-# アダプティ(Adaptee)
-# Targetにはないインターフェイスを持つ
-class OldTextObject
+# Targetにはないインターフェイスを持つ (Adaptee)
+class OldPrinter
   def initialize(string)
     @string = string.dup
   end
@@ -14,9 +13,8 @@ class OldTextObject
   end
 end
 
-# ターゲット(Target)
-# 実行対象
-class TextObject
+# 利用者(Client)へのインターフェイス (Target)
+class Printer
   def initialize(obj)
     @obj = obj
   end
@@ -30,11 +28,10 @@ class TextObject
   end
 end
 
-# アダプタ(Adapter)
-# Targetが利用できるインターフェイスに変換
-class OldTextObjectAdapter
+# Targetが利用できるインターフェイスに変換 (Adapter)
+class Adapter
   def initialize(string)
-    @old_printer = OldTextObject.new(string)
+    @old_printer = OldPrinter.new(string)
   end
 
   def print_weak
@@ -48,8 +45,10 @@ end
 
 # ===========================================
 # 利用者(Client)
-p = TextObject.new(OldTextObjectAdapter.new("Hello"))
+p = Printer.new(Adapter.new("Hello"))
+
 p.print_weak
+#=> (Hello)
+
 p.print_strong
-#(Hello)
-#*Hello*
+#=> *Hello*
