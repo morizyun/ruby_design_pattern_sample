@@ -2,7 +2,7 @@
 require 'find'
 
 # 命令・抽象的な表現(AbstractExpression)
-# Expression　共通するコードを持つ
+# Expression 共通するコードを持つ
 class Expression
   def |(other)
     Or.new(self, other)
@@ -120,28 +120,27 @@ end
 
 # ===========================================
 complex_expression1 = And.new(FileName.new('*.mp3'), FileName.new('big*'))
-puts complex_expression1.evaluate('13_test_data_dir')
-#13_test_data_dir/big.mp3
-#13_test_data_dir/big2.mp3
+puts complex_expression1.evaluate('13_test_data')
+#=> 13_test_data/big.mp3
+#=> 13_test_data/big2.mp3
 
 complex_expression2 = Bigger.new(1024)
-puts complex_expression2.evaluate('13_test_data_dir')
-# 以下出力結果
-#13_test_data_dir/big.mp3
-#13_test_data_dir/big2.mp3
-#13_test_data_dir/subdir/other.mp3
+puts complex_expression2.evaluate('13_test_data')
+#=> 13_test_data/big.mp3
+#=> 13_test_data/big2.mp3
+#=> 13_test_data/subdir/other.mp3
 
 complex_expression3 = FileName.new('*.mp3') & FileName.new('big*')
-puts complex_expression3.evaluate('13_test_data_dir')
-#13_test_data_dir/big.mp3
-#13_test_data_dir/big2.mp3
+puts complex_expression3.evaluate('13_test_data')
+#=> 13_test_data/big.mp3
+#=> 13_test_data/big2.mp3
 
 complex_expression4 = All.new
-puts complex_expression4.evaluate('13_test_data_dir')
-#13_test_data_dir/big.mp3
-#13_test_data_dir/big2.mp3
-#13_test_data_dir/small.mp3
-#13_test_data_dir/small1.txt
-#13_test_data_dir/small2.txt
-#13_test_data_dir/subdir/other.mp3
-#13_test_data_dir/subdir/small.jpg
+puts complex_expression4.evaluate('13_test_data')
+#=> 13_test_data/big.mp3
+#=> 13_test_data/big2.mp3
+#=> 13_test_data/small.mp3
+#=> 13_test_data/small1.txt
+#=> 13_test_data/small2.txt
+#=> 13_test_data/subdir/other.mp3
+#=> 13_test_data/subdir/small.jpg
