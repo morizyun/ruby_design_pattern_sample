@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# ConcreteBuilder：ビルダーの実装部分
-# SaltWater： 塩水クラス
+# SaltWater: 塩水クラス (ConcreteBuilder：ビルダーの実装部分)
 class SaltWater
   attr_accessor :water, :salt
   def initialize(water, salt)
@@ -15,8 +14,7 @@ class SaltWater
   end
 end
 
-# ConcreteBuilder：ビルダーの実装部分
-# SugarWater： 砂糖水クラス
+# SugarWater: 砂糖水クラス (ConcreteBuilder：ビルダーの実装部分)
 class SugarWater
   attr_accessor :water, :sugar
   def initialize(water, sugar)
@@ -30,14 +28,13 @@ class SugarWater
   end
 end
 
-# Builder：
-# SugarWaterBuilder： 加工水クラス
+# SugarWaterBuilder: 加工水クラス (Builder)
 class WaterWithMaterialBuilder
   def initialize(class_name)
     @water_with_material = class_name.new(0,0)
   end
 
-  # 調味料を入れる
+  # 素材を入れる
   def add_material(material_amount)
     @water_with_material.add_material(material_amount)
   end
@@ -53,7 +50,7 @@ class WaterWithMaterialBuilder
   end
 end
 
-# Director： 加工水の作成過程を取り決める
+# Director: 加工水の作成過程を取り決める
 class Director
   def initialize(builder)
     @builder = builder
@@ -72,11 +69,11 @@ director = Director.new(builder)
 director.cook
 
 p builder.result
-# #<SugarWater:0x007fc773085bc8 @water=450, @sugar=125>
+#=> #<SugarWater:0x007fc773085bc8 @water=450, @sugar=125>
 
 builder = WaterWithMaterialBuilder.new(SaltWater)
 director = Director.new(builder)
 director.cook
 
 p builder.result
-# #<SaltWater:0x007f92cc103ba8 @water=450, @salt=125>
+#=> #<SaltWater:0x007f92cc103ba8 @water=450, @salt=125>

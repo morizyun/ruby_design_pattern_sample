@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# ConcreteBuilder：ビルダーの実装部分
-# SugarWater： 砂糖水クラス
+# SugarWater： 砂糖水クラス (ConcreteBuilder：ビルダーの実装部分)
 class SugarWater
   attr_accessor :water, :sugar
   def initialize(water, sugar)
@@ -10,8 +9,7 @@ class SugarWater
   end
 end
 
-# Builder：
-# SugarWaterBuilder： 砂糖水クラス
+# SugarWaterBuilder： 砂糖水クラス (Builder)
 class SugarWaterBuilder
   def initialize
     @sugar_water = SugarWater.new(0,0)
@@ -52,5 +50,5 @@ director = Director.new(builder)
 director.cook
 
 p builder.result
-# #<SugarWater:0x007fc773085bc8 @water=450, @sugar=125>
+#=> #<SugarWater:0x007fc773085bc8 @water=450, @sugar=125>
 

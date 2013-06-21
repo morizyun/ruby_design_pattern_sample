@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Product
-# アヒル
+# アヒル (Product)
 class Duck
   def initialize(name)
     @name = name
@@ -12,8 +11,7 @@ class Duck
   end
 end
 
-# Product
-# カエル
+# カエル (Product)
 class Frog
   def initialize(name)
     @name = name
@@ -24,8 +22,7 @@ class Frog
   end
 end
 
-# Creator
-# 池
+# 池 (Creator)
 class Pond
   def initialize(number_animals)
     @animals = []
@@ -40,16 +37,14 @@ class Pond
   end
 end
 
-# ConcreteCreator
-# DuckPond: 池のアヒルを生成する
+# DuckPond: 池のアヒルを生成する (ConcreteCreator)
 class DuckPond < Pond
   def new_animal(name)
     Duck.new(name)
   end
 end
 
-# ConcreteCreator
-# FrogPond: 池のカエルを生成する
+# FrogPond: 池のカエルを生成する (ConcreteCreator)
 class FrogPond < Pond
   def new_animal(name)
     Frog.new(name)

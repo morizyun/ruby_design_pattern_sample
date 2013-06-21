@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Product
-# 動物/アヒル
+# 動物/アヒル (Product)
 class Duck
   def initialize(name)
     @name = name
@@ -12,8 +11,7 @@ class Duck
   end
 end
 
-# Product
-# 動物/カエル
+# 動物/カエル (Product)
 class Frog
   def initialize(name)
     @name = name
@@ -24,8 +22,7 @@ class Frog
   end
 end
 
-# Product
-# 植物/藻
+# 植物/藻 (Product)
 class Algae
   def initialize(name)
     @name = name
@@ -36,8 +33,7 @@ class Algae
   end
 end
 
-# Product
-# 植物/スイレン
+# 植物/スイレン (Product)
 class WaterLily
   def initialize(name)
     @name = name
@@ -48,8 +44,7 @@ class WaterLily
   end
 end
 
-# ConcreteFactory
-# カエル(Flag)と藻(Algae)の生成を行う
+# カエル(Flag)と藻(Algae)の生成を行う (ConcreteFactory)
 class FlagAndAlgaeFactory
   def new_animal(name)
     Frog.new(name)
@@ -60,8 +55,7 @@ class FlagAndAlgaeFactory
   end
 end
 
-# ConcreteFactory
-# アヒル(Duck)とスイレン(WaterLily)の生成を行う
+# アヒル(Duck)とスイレン(WaterLily)の生成を行う(ConcreteFactory)
 class DuckAndWaterLilyFactory
   def new_animal(name)
     Duck.new(name)
@@ -72,8 +66,7 @@ class DuckAndWaterLilyFactory
   end
 end
 
-# AbstractFactory
-# 池
+# 池 (AbstractFactory)
 class Pond
   def initialize(number_animals, number_plants, organism_factory)
     @animals = []
@@ -86,7 +79,7 @@ class Pond
     @plants = []
     # 池の植物を定義する
     number_plants.times do |i|
-      plant = organism_factory.new_plant("植物　#{i}")
+      plant = organism_factory.new_plant("植物 #{i}")
       @plants << plant
     end
   end
@@ -101,16 +94,16 @@ end
 # ===========================================
 pond = Pond.new(1, 4, FlagAndAlgaeFactory.new)
 pond.simulate_now
-#藻 植物　0 は成長中です
-#藻 植物　1 は成長中です
-#藻 植物　2 は成長中です
-#藻 植物　3 は成長中です
-#カエル 動物 0 は食事中です
+#=> 藻 植物 0 は成長中です
+#=> 藻 植物 1 は成長中です
+#=> 藻 植物 2 は成長中です
+#=> 藻 植物 3 は成長中です
+#=> カエル 動物 0 は食事中です
 
 pond = Pond.new(2, 3, DuckAndWaterLilyFactory.new)
 pond.simulate_now
-#スイレン 植物　0 は成長中です
-#スイレン 植物　1 は成長中です
-#スイレン 植物　2 は成長中です
-#アヒル 動物 0 は食事中です
-#アヒル 動物 1 は食事中です
+#=> スイレン 植物 0 は成長中です
+#=> スイレン 植物 1 は成長中です
+#=> スイレン 植物 2 は成長中です
+#=> アヒル 動物 0 は食事中です
+#=> アヒル 動物 1 は食事中です
