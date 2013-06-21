@@ -2,7 +2,7 @@
 require 'find'
 
 # 命令・抽象的な表現(AbstractExpression)
-# Expression 共通するコードを持つ
+# Expression: 共通するコードを持つ
 class Expression
   def |(other)
     Or.new(self, other)
