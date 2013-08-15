@@ -44,8 +44,39 @@ class WaterLily
   end
 end
 
-# カエル(Flag)と藻(Algae)の生成を行う (ConcreteFactory)
-class FlagAndAlgaeFactory
+# 池の生態系を作る (Abstract Factory)
+class OrganismFactory
+  def initialize(number_animals, number_plants)
+    @animals = []
+    # 池の動物を定義する
+    number_animals.times do |i|
+      animal = new_animal("動物 #{i}")
+      @animals << animal
+    end
+
+    @plants = []
+    # 池の植物を定義する
+    number_plants.times do |i|
+      plant = new_plant("植物 #{i}")
+      @plants << plant
+    end
+  end
+
+  # 動物についてのオブジェクトを返す
+  def get_plants
+		@plants
+	end
+
+  # 植物についてのオブジェクトを返す
+	def get_animals
+		@animals
+	end
+end
+
+# カエル(Flag)と藻(Algae)の生成を行う (Concrete Factory)
+class FlagAndAlgaeFactory < OrganismFactory
+	private
+
   def new_animal(name)
     Frog.new(name)
   end
@@ -55,8 +86,10 @@ class FlagAndAlgaeFactory
   end
 end
 
-# アヒル(Duck)とスイレン(WaterLily)の生成を行う(ConcreteFactory)
-class DuckAndWaterLilyFactory
+# アヒル(Duck)とスイレン(WaterLily)の生成を行う(Concrete Factory)
+class DuckAndWaterLilyFactory < OrganismFactory
+	private
+
   def new_animal(name)
     Duck.new(name)
   end
@@ -66,44 +99,25 @@ class DuckAndWaterLilyFactory
   end
 end
 
-# 池 (AbstractFactory)
-class Pond
-  def initialize(number_animals, number_plants, organism_factory)
-    @animals = []
-    # 池の動物を定義する
-    number_animals.times do |i|
-      animal = organism_factory.new_animal("動物 #{i}")
-      @animals << animal
-    end
-
-    @plants = []
-    # 池の植物を定義する
-    number_plants.times do |i|
-      plant = organism_factory.new_plant("植物 #{i}")
-      @plants << plant
-    end
-  end
-
-  # 池の今をシミュレートする
-  def simulate_now
-    @plants.each { |plant| plant.grow}
-    @animals.each { |animal| animal.eat}
-  end
-end
-
 # ===========================================
-pond = Pond.new(1, 4, FlagAndAlgaeFactory.new)
-pond.simulate_now
-#=> 藻 植物 0 は成長中です
-#=> 藻 植物 1 は成長中です
-#=> 藻 植物 2 は成長中です
-#=> 藻 植物 3 は成長中です
+factory = FlagAndAlgaeFactory.new(4,1)
+animals = factory.get_animals
+animals.each { |animal| animal.eat }
 #=> カエル 動物 0 は食事中です
+#=> カエル 動物 1 は食事中です
+#=> カエル 動物 2 は食事中です
+#=> カエル 動物 3 は食事中です
+plants = factory.get_plants
+plants.each { |plant| plant.grow }
+#=> 藻 植物 0 は成長中です
 
-pond = Pond.new(2, 3, DuckAndWaterLilyFactory.new)
-pond.simulate_now
-#=> スイレン 植物 0 は成長中です
-#=> スイレン 植物 1 は成長中です
-#=> スイレン 植物 2 は成長中です
+factory = DuckAndWaterLilyFactory.new(3,2)
+animals = factory.get_animals
+animals.each { |animal| animal.eat }
 #=> アヒル 動物 0 は食事中です
 #=> アヒル 動物 1 は食事中です
+#=> アヒル 動物 2 は食事中です
+plants = factory.get_plants
+plants.each { |plant| plant.grow }
+#=> スイレン 植物 0 は成長中です
+#=> スイレン 植物 1 は成長中です
