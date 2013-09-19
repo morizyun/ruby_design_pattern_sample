@@ -73,8 +73,8 @@ class OrganismFactory
 	end
 end
 
-# カエル(Flag)と藻(Algae)の生成を行う (Concrete Factory)
-class FlagAndAlgaeFactory < OrganismFactory
+# カエル(Frog)と藻(Algae)の生成を行う (Concrete Factory)
+class FrogAndAlgaeFactory < OrganismFactory
 	private
 
   def new_animal(name)
@@ -100,7 +100,7 @@ class DuckAndWaterLilyFactory < OrganismFactory
 end
 
 # ===========================================
-factory = FlagAndAlgaeFactory.new(4,1)
+factory = FrogAndAlgaeFactory.new(4,1)
 animals = factory.get_animals
 animals.each { |animal| animal.eat }
 #=> カエル 動物 0 は食事中です
