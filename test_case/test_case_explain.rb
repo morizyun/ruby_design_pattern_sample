@@ -18,3 +18,4 @@ end
 
 TestCaseExplain.new(Rspec.new).execute
 TestCaseExplain.new(Minitest.new).execute
+TestCaseExplain.new(TestUnit.new).execute

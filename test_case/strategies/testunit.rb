@@ -1,4 +1,4 @@
-class Minitest
+class TestUnit
   include AbstractTestCase
 
   def test_start
