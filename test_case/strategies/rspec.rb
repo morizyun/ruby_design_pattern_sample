@@ -1,4 +1,5 @@
-class Rspec < Base
+class Rspec
+  include AbstractTestCase
   def test_start
     puts %!before { @title = '%s' }\n! % title
   end

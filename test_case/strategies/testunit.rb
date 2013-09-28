@@ -6,6 +6,6 @@ class Minitest
   end
 
   def test_line(line)
-    puts %!test { assert @title.%s }! % line
+    puts %!def test_assert_title;  assert @title.%s; end! % line
   end
 end
