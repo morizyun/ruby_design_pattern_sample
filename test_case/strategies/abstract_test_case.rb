@@ -1,6 +1,6 @@
 ##
 # TemplateMethodクラス
-class Base
+module AbstractTestCase
   def title
     @title ||= "タイトル"
   end

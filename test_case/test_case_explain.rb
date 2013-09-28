@@ -1,6 +1,6 @@
-require_relative "./strategies/base.rb"
-require_relative "./strategies/minitest.rb"
-require_relative "./strategies/rspec.rb"
+Dir[File.expand_path("../strategies/*.rb", __FILE__)].each {|f|
+  require f
+}
 
 class TestCaseExplain
   #
@@ -18,3 +18,4 @@ end
 
 TestCaseExplain.new(Rspec.new).execute
 TestCaseExplain.new(Minitest.new).execute
+TestCaseExplain.new(TestUnit.new).execute
