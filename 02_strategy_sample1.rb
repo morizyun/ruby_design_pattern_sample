@@ -23,7 +23,8 @@ class PlaneTextFormatter < Formatter
 end
 
 # レポートを表す(コンテキスト)
-class Report
+class ReportT
+  # Test
   attr_reader :title, :text
   attr_accessor :formatter
 
