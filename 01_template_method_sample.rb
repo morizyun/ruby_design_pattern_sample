@@ -51,8 +51,8 @@ class HTMLReport < Report
   end
 end
 
-# PlaneText形式(<code>*****</code>で囲う)でレポートを出力
-class PlaneTextReport < Report
+# PlainText形式(<code>*****</code>で囲う)でレポートを出力
+class PlainTextReport < Report
   # レポートの先頭に出力
   def output_start
     puts "**** #{@title} ****"
@@ -73,8 +73,8 @@ html_report.output_report
 #<p>report line 3</p>
 #</body></html>
 
-plane_text_report = PlaneTextReport.new
-plane_text_report.output_report
+plain_text_report = PlainTextReport.new
+plain_text_report.output_report
 #**** report title ****
 #report line 1
 #report line 2
