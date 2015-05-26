@@ -62,12 +62,12 @@ class OrganismFactory
     end
   end
 
-  # 動物についてのオブジェクトを返す
+  # 植物についてのオブジェクトを返す
   def get_plants
 		@plants
 	end
 
-  # 植物についてのオブジェクトを返す
+  # 動物についてのオブジェクトを返す
 	def get_animals
 		@animals
 	end
